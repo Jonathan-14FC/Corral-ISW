@@ -1,0 +1,65 @@
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: url('potros.png') no-repeat center center fixed;
+  background-size: cover;
+  background-blend-mode: lighten;
+  background-color: rgba(0, 0, 50, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 2em 3em;
+  border-radius: 20px;
+  box-shadow: 0 0 15px rgba(0,0,50,0.3);
+  width: 350px;
+  text-align: center;
+}
+
+.form h2 {
+  color: #0033cc;
+  margin-bottom: 1em;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  outline: none;
+  font-size: 14px;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 12px;
+  background-color: #0033cc;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #001a80;
+}
+
+a {
+  color: #0033cc;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.error {
+  color: red;
+  font-size: 14px;
+}
