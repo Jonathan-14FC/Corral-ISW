@@ -6,8 +6,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $correo = $_POST['correo'];
     $password = $_POST['password'];
 
-    $sql = "SELECT * FROM usuarios WHERE correo='$correo'";
-    $result = $conn->query($sql);
+    $stmt = $conn->prepare("SELECT * FROM usuarios WHERE correo=?");
+    $stmt->bind_param("s", $correo);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
         $user = $result->fetch_assoc();
@@ -27,20 +29,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Login - Potros ITSON</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <title>Login - ISW ITSON</title>
+    <link rel="stylesheet" href="style.css?v=<?php echo time(); ?>">
 </head>
 <body>
-  <div class="container">
-    <form class="form" method="POST">
-      <h2>Iniciar Sesión</h2>
-      <?php if (!empty($error)) echo "<p class='error'>$error</p>"; ?>
-      <input type="email" name="correo" placeholder="Correo electrónico" required>
-      <input type="password" name="password" placeholder="Contraseña" required>
-      <button type="submit">Entrar</button>
-      <p>¿No tienes cuenta? <a href="register.php">Regístrate</a></p>
+<div class="login-form">
+    <h2>Iniciar Sesión</h2>
+    <?php if (!empty($error)) echo "<p class='error'>$error</p>"; ?>
+    <form method="POST">
+        <input type="email" name="correo" placeholder="Correo electrónico" required>
+        <input type="password" name="password" placeholder="Contraseña" required>
+        <button type="submit">Entrar</button>
     </form>
-  </div>
+    <p>¿No tienes cuenta? <a href="register.php">Regístrate</a></p>
+</div>
 </body>
 </html>

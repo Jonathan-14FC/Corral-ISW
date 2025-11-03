@@ -1,65 +1,150 @@
+/* ==========================
+   Estilos globales
+========================== */
 body {
-  margin: 0;
-  font-family: 'Poppins', sans-serif;
-  background: url('potros.png') no-repeat center center fixed;
-  background-size: cover;
-  background-blend-mode: lighten;
-  background-color: rgba(0, 0, 50, 0.7);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-.container {
-  background: rgba(255, 255, 255, 0.95);
-  padding: 2em 3em;
-  border-radius: 20px;
-  box-shadow: 0 0 15px rgba(0,0,50,0.3);
-  width: 350px;
-  text-align: center;
-}
-
-.form h2 {
-  color: #0033cc;
-  margin-bottom: 1em;
-}
-
-input {
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  border-radius: 12px;
-  border: 1px solid #ccc;
-  outline: none;
-  font-size: 14px;
-}
-
-button {
-  width: 100%;
-  padding: 10px;
-  border: none;
-  border-radius: 12px;
-  background-color: #0033cc;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #001a80;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: #f0f2f5; /* Fondo gris claro */
+    display: flex;
+    justify-content: center;
+    padding: 20px;
 }
 
 a {
-  color: #0033cc;
-  text-decoration: none;
+    text-decoration: none;
+    color: #0d1b2a; /* Azul marino */
 }
 
 a:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }
 
 .error {
-  color: red;
-  font-size: 14px;
+    color: red;
+    font-size: 14px;
+}
+
+/* ==========================
+   Contenedor principal del foro
+========================== */
+.home {
+    width: 800px;
+    max-width: 100%;
+}
+
+/* ==========================
+   Tarjetas de preguntas y respuestas
+========================== */
+.pregunta, .respuesta {
+    background-color: #ffffff; /* Fondo blanco */
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    padding: 15px 20px;
+    margin-bottom: 20px;
+}
+
+.pregunta h3 {
+    margin-top: 0;
+    color: #0d1b2a; /* Azul marino para títulos */
+}
+
+.pregunta p, .respuesta p {
+    color: #333;
+    line-height: 1.5;
+}
+
+.pregunta small, .respuesta small {
+    color: #555;
+}
+
+/* ==========================
+   Formulario de nueva pregunta y respuestas
+========================== */
+form {
+    background-color: #ffffff;
+    padding: 15px 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+input[type="text"], input[type="email"], input[type="password"], textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    resize: vertical;
+}
+
+button {
+    background-color: #0d1b2a; /* Azul marino */
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 15px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #081023; /* Azul más oscuro al pasar el mouse */
+}
+
+/* ==========================
+   Encabezado y navegación
+========================== */
+.home h1 {
+    color: #0d1b2a;
+    margin-bottom: 10px;
+}
+
+.home a {
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+/* ==========================
+   Respuestas dentro de preguntas
+========================== */
+.respuesta {
+    margin-left: 20px; /* Indentado para diferenciar */
+}
+
+/* ==========================
+   Formulario de login y registro
+========================== */
+.login-form, .register-form {
+    width: 350px;
+    margin: 50px auto;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.login-form input, .register-form input, 
+.login-form button, .register-form button,
+.login-form textarea, .register-form textarea {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    outline: none;
+    resize: vertical;
+}
+
+.login-form button, .register-form button {
+    background-color: #0d1b2a;
+    color: white;
+    border: none;
+}
+
+.login-form button:hover, .register-form button:hover {
+    background-color: #081023;
 }
