@@ -1,12 +1,11 @@
 <?php
-include 'db.php';
+include '../componentes/db.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nombre = $_POST['nombre'];
     $correo = $_POST['correo'];
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-    // Verificar si el correo ya existe
     $stmt = $conn->prepare("SELECT * FROM usuarios WHERE correo=?");
     $stmt->bind_param("s", $correo);
     $stmt->execute();
@@ -27,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <title>Registro - ISW ITSON</title>
-    <link rel="stylesheet" href="style.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="../recursos/style.css?v=<?php echo time(); ?>">
 </head>
 <body>
 <div class="register-form">

@@ -4,7 +4,12 @@
 body {
     margin: 0;
     font-family: 'Poppins', sans-serif;
-    background-color: #f0f2f5; /* Fondo gris claro */
+    background-image: url('/img/potros.png');
+    background-position: right bottom; 
+    background-color: #ffffff;
+    background-size: 100px;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     display: flex;
     justify-content: center;
     padding: 20px;

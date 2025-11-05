@@ -1,5 +1,5 @@
 <?php
-include 'db.php';
+include '../componentes/db.php';
 session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <title>Login - ISW ITSON</title>
-    <link rel="stylesheet" href="style.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="../recursos/style.css?v=<?php echo time(); ?>">
 </head>
 <body>
 <div class="login-form">

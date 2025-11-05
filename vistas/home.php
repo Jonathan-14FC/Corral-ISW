@@ -1,5 +1,5 @@
 <?php
-include 'db.php';
+include '../componentes/db.php';
 session_start();
 if (!isset($_SESSION['nombre'])) {
     header("Location: login.php");
@@ -18,15 +18,12 @@ $result = $conn->query($sql);
 <head>
     <meta charset="UTF-8">
     <title>Foro ISW ITSON</title>
-    <link rel="stylesheet" href="style.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="../recursos/style.css?v=<?php echo time(); ?>">
 </head>
 <body>
 <div class="home">
-    <h1>Bienvenido, <?php echo $_SESSION['nombre']; ?> 🐎</h1>
-    <a href="logout.php">Cerrar sesión</a>
-
     <h2>Hacer una nueva pregunta</h2>
-    <form method="POST" action="crear_pregunta.php">
+    <form method="POST" action="../acciones/crear_pregunta.php">
         <input type="text" name="titulo" placeholder="Título de la pregunta" required>
         <textarea name="contenido" placeholder="Escribe tu pregunta..." required></textarea>
         <button type="submit">Publicar pregunta</button>
@@ -40,14 +37,14 @@ $result = $conn->query($sql);
             echo "<h3>" . htmlspecialchars($row['titulo']) . "</h3>";
             echo "<p>" . nl2br(htmlspecialchars($row['contenido'])) . "</p>";
             echo "<small>Por: " . htmlspecialchars($row['nombre']) . " | " . $row['fecha'] . "</small>";
-            echo "<p><a href='ver_pregunta.php?id=" . $row['id'] . "'>Ver respuestas</a></p>";
+            echo "<p><a href='../acciones/ver_pregunta.php?id=" . $row['id'] . "'>Ver respuestas</a></p>";
             echo "</div>";
         }
     } else {
         echo "<p>No hay preguntas aún.</p>";
     }
     ?>
+     <a href="../acciones/logout.php">Cerrar sesión</a>
 </div>
 </body>
 </html>
-

@@ -1,8 +1,8 @@
 <?php
-include 'db.php';
+include '../componentes/db.php';
 session_start();
 if (!isset($_SESSION['nombre'])) {
-    header("Location: login.php");
+    header("Location: ../vistas/login.php");
     exit();
 }
 
@@ -26,7 +26,7 @@ $respuestas = $stmt->get_result();
 <head>
   <meta charset="UTF-8">
   <title><?php echo htmlspecialchars($pregunta['titulo']); ?></title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="../recursos/style.css">
 </head>
 <body>
   <a href="home.php">← Volver</a>
