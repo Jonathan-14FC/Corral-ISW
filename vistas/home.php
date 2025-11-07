@@ -1,12 +1,16 @@
 <?php
 include '../componentes/db.php';
 session_start();
-if (!isset($_SESSION['nombre'])) {
+
+if (!isset($_SESSION['nombre']) || !isset($_SESSION['id'])) {
     header("Location: login.php");
     exit();
 }
 
-$sql = "SELECT p.id, p.titulo, p.contenido, p.fecha, u.nombre 
+$id_usuario = $_SESSION['id'];
+
+// Consulta de preguntas con nombre del autor
+$sql = "SELECT p.id, p.titulo, p.contenido, p.fecha, u.nombre, p.id_usuario 
         FROM preguntas p
         JOIN usuarios u ON p.id_usuario = u.id
         ORDER BY p.fecha DESC";
@@ -38,13 +42,23 @@ $result = $conn->query($sql);
             echo "<p>" . nl2br(htmlspecialchars($row['contenido'])) . "</p>";
             echo "<small>Por: " . htmlspecialchars($row['nombre']) . " | " . $row['fecha'] . "</small>";
             echo "<p><a href='../acciones/ver_pregunta.php?id=" . $row['id'] . "'>Ver respuestas</a></p>";
+
+            // Mostrar botón eliminar solo si la pregunta es del usuario actual
+            if ($row['id_usuario'] == $id_usuario) {
+                echo "<form method='POST' action='../acciones/eliminar_pregunta.php' onsubmit='return confirm(\"¿Seguro que deseas eliminar esta pregunta?\");'>";
+                echo "<input type='hidden' name='id_pregunta' value='" . $row['id'] . "'>";
+                echo "<button type='submit' class='btn-eliminar'>Eliminar</button>";
+                echo "</form>";
+            }
+
             echo "</div>";
         }
     } else {
         echo "<p>No hay preguntas aún.</p>";
     }
     ?>
-     <a href="../acciones/logout.php">Cerrar sesión</a>
+
+    <a href="../acciones/logout.php" class="logout">Cerrar sesión</a>
 </div>
 </body>
 </html>

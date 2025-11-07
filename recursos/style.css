@@ -35,6 +35,20 @@ a:hover {
 .home {
     width: 800px;
     max-width: 100%;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+/* ==========================
+   Títulos y encabezados
+========================== */
+h2 {
+    border-left: 5px solid #0d1b2a;
+    padding-left: 10px;
+    color: #0d1b2a;
+    margin-bottom: 20px;
 }
 
 /* ==========================
@@ -46,6 +60,12 @@ a:hover {
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     padding: 15px 20px;
     margin-bottom: 20px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pregunta:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 
 .pregunta h3 {
@@ -63,14 +83,14 @@ a:hover {
 }
 
 /* ==========================
-   Formulario de nueva pregunta y respuestas
+   Formulario de nueva pregunta
 ========================== */
 form {
     background-color: #ffffff;
     padding: 15px 20px;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 input[type="text"], input[type="email"], input[type="password"], textarea {
@@ -92,6 +112,7 @@ button {
     font-size: 15px;
     border-radius: 8px;
     cursor: pointer;
+    transition: background 0.3s;
 }
 
 button:hover {
@@ -99,23 +120,37 @@ button:hover {
 }
 
 /* ==========================
-   Encabezado y navegación
+   Botón Eliminar
 ========================== */
-.home h1 {
-    color: #0d1b2a;
-    margin-bottom: 10px;
+.btn-eliminar {
+    background-color: #b71c1c;
+    color: #fff;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 8px;
 }
 
-.home a {
-    display: inline-block;
-    margin-bottom: 20px;
+.btn-eliminar:hover {
+    background-color: #7f0000;
 }
 
 /* ==========================
-   Respuestas dentro de preguntas
+   Enlaces y navegación
 ========================== */
-.respuesta {
-    margin-left: 20px; /* Indentado para diferenciar */
+.logout {
+    display: inline-block;
+    margin-top: 20px;
+    color: #b71c1c;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.logout:hover {
+    text-decoration: underline;
 }
 
 /* ==========================

@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("iss", $id_usuario, $titulo, $contenido);
     $stmt->execute();
 
-    header("Location: home.php");
+    header("Location: ../vistas/home.php");
     exit();
 }
 ?>
