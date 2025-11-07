@@ -188,3 +188,139 @@ button:hover {
 .login-form button:hover, .register-form button:hover {
     background-color: #081023;
 }
+/* ==========================
+   Diseño general con sidebar
+========================== */
+.layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* ==========================
+   Diseño general con sidebar
+========================== */
+.layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* ==========================
+   Barra lateral izquierda
+========================== */
+.sidebar {
+    width: 180px; /* 🔹 Más delgada */
+    background-color: #0d1b2a; /* Azul marino */
+    color: #ffffff;
+    padding: 20px 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between; /* 🔹 Mantiene el botón abajo */
+    position: fixed; /* 🔹 Se queda pegada a la izquierda */
+    top: 0;
+    left: 0;
+    bottom: 0;
+}
+
+.sidebar h2 {
+    color: #ffffff;
+    font-size: 18px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ffffff33;
+    padding-bottom: 8px;
+    width: 100%;
+}
+
+.sidebar nav {
+    flex-grow: 1;
+    width: 100%;
+}
+
+.sidebar nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.sidebar nav ul li {
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.sidebar nav ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 500;
+    display: block;
+    padding: 8px 10px;
+    border-radius: 6px;
+    transition: background 0.3s;
+}
+
+.sidebar nav ul li a:hover {
+    background-color: #1b263b;
+}
+
+/* ==========================
+   Contenido principal
+========================== */
+.home {
+    flex: 1;
+    padding: 30px;
+    background-color: #f8f9fa;
+    margin-left: 180px; /* 🔹 Deja espacio para la barra lateral */
+}
+
+/* ==========================
+   Botón de cerrar sesión
+========================== */
+.logout {
+    background-color: #b71c1c;
+    color: #fff !important;
+    padding: 10px 12px;
+    border-radius: 8px;
+    display: inline-block;
+    text-align: center;
+    width: 75%;
+    font-weight: bold;
+    transition: background 0.3s;
+    margin-top: auto;
+}
+
+.logout:hover {
+    background-color: #7f0000;
+}
+/* ==========================
+   Página de perfil
+========================== */
+.perfil {
+    padding: 30px;
+    background-color: #f8f9fa;
+    margin-left: 180px;
+}
+
+.perfil-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+.perfil-foto img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #0d1b2a;
+}
+
+.perfil-info p {
+    font-size: 15px;
+    color: #333;
+    margin: 5px 0;
+}
