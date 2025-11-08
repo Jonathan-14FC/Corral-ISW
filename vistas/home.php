@@ -2,6 +2,7 @@
 include '../componentes/db.php';
 session_start();
 
+//  Verificar sesión
 if (!isset($_SESSION['nombre']) || !isset($_SESSION['id'])) {
     header("Location: login.php");
     exit();
@@ -9,12 +10,24 @@ if (!isset($_SESSION['nombre']) || !isset($_SESSION['id'])) {
 
 $id_usuario = $_SESSION['id'];
 
-// Consulta de preguntas con nombre del autor
-$sql = "SELECT p.id, p.titulo, p.contenido, p.fecha, u.nombre, p.id_usuario 
+//  Obtener preguntas con usuario, materia y semestre
+$sql = "SELECT p.id, p.titulo, p.contenido, p.fecha, u.nombre, p.id_usuario, m.nombre AS materia, s.nombre AS semestre
         FROM preguntas p
         JOIN usuarios u ON p.id_usuario = u.id
+        JOIN materias m ON p.materia_id = m.id
+        JOIN semestres s ON m.semestre_id = s.id
         ORDER BY p.fecha DESC";
 $result = $conn->query($sql);
+
+//  Obtener todos los semestres
+$semestres = $conn->query("SELECT * FROM semestres ORDER BY id");
+
+//  Obtener todas las materias
+$materias_result = $conn->query("SELECT * FROM materias ORDER BY semestre_id, id");
+$materias_array = [];
+while($m = $materias_result->fetch_assoc()) {
+    $materias_array[$m['semestre_id']][] = $m;
+}
 ?>
 
 <!DOCTYPE html>
@@ -27,27 +40,53 @@ $result = $conn->query($sql);
 <body>
 <div class="layout">
 
-    <!-- 🔹 Barra latera donde agregaré las clases de todos los semestres y sus apartados -->
+    <!--  Sidebar con menú de materias -->
     <aside class="sidebar">
-    <div>
-        <h2>Corral ISW</h2>
-        <nav>
+        <div>
+            <h2>Corral ISW</h2>
+            <nav>
+                <ul>
+                    <li><a href="home.php">Inicio</a></li>
+                    <li><a href="perfil.php">Mi Perfil</a></li>
+                </ul>
+            </nav>
+
+            <h3>Materias</h3>
             <ul>
-                <li><a href="home.php">Inicio</a></li> <!-- Boton para cerrar sesion -->
-                <li><a href="perfil.php">Mi Perfil</a></li> <!-- Boton para acceder al perfil -->
+                <?php foreach ($materias_array as $semestre_id => $materias): ?>
+                    <?php foreach ($materias as $m): ?>
+                        <li>
+                            <a href="materia.php?materia_id=<?= $m['id'] ?>">
+                                <?= htmlspecialchars($m['nombre']) ?>
+                            </a>
+                        </li>
+                    <?php endforeach; ?>
+                <?php endforeach; ?>
             </ul>
-        </nav>
-    </div>
-    <a href="../acciones/logout.php" class="logout">Cerrar sesión</a>
-</aside>
+        </div>
+        <a href="../acciones/logout.php" class="logout">Cerrar sesión</a>
+    </aside>
 
-
-    <!-- 🔹 Contenido principal -->
+    <!--  Contenido principal -->
     <main class="home">
         <h2>Hacer una nueva pregunta</h2>
         <form method="POST" action="../acciones/crear_pregunta.php">
             <input type="text" name="titulo" placeholder="Título de la pregunta" required>
             <textarea name="contenido" placeholder="Escribe tu pregunta..." required></textarea>
+
+            <!-- Select de Semestre -->
+            <select name="semestre" id="semestre" required>
+                <option value="">Selecciona un semestre</option>
+                <?php while($s = $semestres->fetch_assoc()): ?>
+                    <option value="<?= $s['id'] ?>"><?= $s['nombre'] ?></option>
+                <?php endwhile; ?>
+            </select>
+
+            <!-- Select de Materia -->
+            <select name="materia_id" id="materia" required>
+                <option value="">Selecciona una materia</option>
+            </select>
+
             <button type="submit">Publicar pregunta</button>
         </form>
 
@@ -58,6 +97,7 @@ $result = $conn->query($sql);
                 echo "<div class='pregunta'>";
                 echo "<h3>" . htmlspecialchars($row['titulo']) . "</h3>";
                 echo "<p>" . nl2br(htmlspecialchars($row['contenido'])) . "</p>";
+                echo "<p><strong>Materia:</strong> " . htmlspecialchars($row['materia']) . " | <strong>Semestre:</strong> " . htmlspecialchars($row['semestre']) . "</p>";
                 echo "<small>Por: " . htmlspecialchars($row['nombre']) . " | " . $row['fecha'] . "</small>";
                 echo "<p><a href='../acciones/ver_pregunta.php?id=" . $row['id'] . "'>Ver respuestas</a></p>";
 
@@ -76,5 +116,26 @@ $result = $conn->query($sql);
         ?>
     </main>
 </div>
+
+<!--  JS para filtrar materias según semestre -->
+<script>
+const materias = <?php echo json_encode($materias_array); ?>;
+const semestreSelect = document.getElementById('semestre');
+const materiaSelect = document.getElementById('materia');
+
+semestreSelect.addEventListener('change', () => {
+    const semestre_id = semestreSelect.value;
+    materiaSelect.innerHTML = '<option value="">Selecciona una materia</option>';
+    if(materias[semestre_id]) {
+        materias[semestre_id].forEach(m => {
+            const opt = document.createElement('option');
+            opt.value = m.id;
+            opt.textContent = m.nombre;
+            materiaSelect.appendChild(opt);
+        });
+    }
+});
+</script>
+
 </body>
 </html>
