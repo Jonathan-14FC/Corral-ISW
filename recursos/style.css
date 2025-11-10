@@ -324,3 +324,75 @@ button:hover {
     color: #333;
     margin: 5px 0;
 }
+/* Estilos para la barra lateral */
+.sidebar {
+    background-color: #0b1a2b; /* o el color oscuro que uses */
+    color: #ffffff; /* texto blanco */
+    width: 220px;
+    height: 100vh; /* ocupa todo el alto de la ventana */
+    overflow-y: auto; /* agrega scroll vertical */
+    overflow-x: hidden;
+    position: fixed; /* fija la barra al lado izquierdo */
+    top: 0;
+    left: 0;
+    padding: 20px;
+}
+
+/* Todos los textos dentro en blanco */
+.sidebar h2,
+.sidebar h3,
+.sidebar a,
+.sidebar li {
+    color: #ffffff;
+}
+
+/* Quitar subrayado de los enlaces y cambiar color al pasar el cursor */
+.sidebar a {
+    text-decoration: none;
+    display: block;
+    padding: 6px 0;
+    transition: color 0.2s;
+}
+
+.sidebar a:hover {
+    color: #00bfff; /* azul claro al pasar el mouse */
+}
+
+/* Ajusta el contenedor principal para no quedar debajo del sidebar */
+.layout {
+    display: flex;
+}
+
+.home {
+    margin-left: 240px; /* separa el contenido principal del sidebar */
+    padding: 20px;
+}
+/* Botón de Cerrar Sesión */
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.sidebar .logout {
+    display: block;
+    background-color: #e63946; /* rojo agradable */
+    color: white;
+    text-align: center;
+    padding: 10px;
+    border-radius: 8px;
+    margin-top: 20px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.sidebar .logout:hover {
+    background-color: #c71c2d;
+}
+
+/* Asegura que el contenido dentro pueda hacer scroll sin mover el botón */
+.sidebar > div {
+    overflow-y: auto;
+    flex: 1;
+}
